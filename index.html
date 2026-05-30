@@ -5,119 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Romania Procurement Portal</title>
     <style>
-        :root {
-            --romania-blue: #002B7F;
-            --romania-yellow: #FCD116;
-            --romania-red: #CE1126;
-            --dark-bg: #0d1117;
-            --card-bg: #161b22;
-            --text-color: #c9d1d9;
-        }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--dark-bg); color: var(--text-color); margin: 0; padding: 0; }
+        :root { --romania-blue: #002B7F; --romania-yellow: #FCD116; --romania-red: #CE1126; --dark-bg: #0d1117; --card-bg: #161b22; --text-color: #c9d1d9; }
+        body { font-family: sans-serif; background-color: var(--dark-bg); color: var(--text-color); margin: 0; padding: 0; }
         header { background: linear-gradient(90deg, var(--romania-blue) 0%, #001540 100%); border-bottom: 4px solid var(--romania-yellow); padding: 20px; text-align: center; }
-        header h1 { color: #ffffff; margin: 0; font-size: 2.2rem; text-transform: uppercase; }
-        header p { color: var(--romania-yellow); margin: 5px 0 0 0; font-weight: bold; }
+        header h1 { color: #ffffff; margin: 0; text-transform: uppercase; }
+        header p { color: var(--romania-yellow); font-weight: bold; }
         .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
         .card { background-color: var(--card-bg); border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 15px; }
         .price { color: var(--romania-yellow); font-weight: bold; font-size: 1.2rem; }
         .order-panel { background-color: var(--card-bg); border: 1px solid #30363d; border-radius: 8px; padding: 25px; position: sticky; top: 20px; }
-        .submit-btn { width: 100%; background-color: var(--romania-red); color: white; border: none; padding: 12px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 15px; }
-        input, select { width: 100%; padding: 8px; margin: 5px 0 15px 0; background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 4px; }
-        .cart-list { border-top: 1px solid #30363d; padding: 10px 0; }
+        .submit-btn { width: 100%; background-color: var(--romania-red); color: white; border: none; padding: 12px; font-weight: bold; cursor: pointer; }
+        input, select { width: 100%; padding: 8px; margin: 5px 0 15px 0; background: #0d1117; border: 1px solid #30363d; color: white; }
     </style>
 </head>
 <body>
-
     <header>
         <h1>ROMANIA PROCUREMENT PORTAL</h1>
         <p>Official Global Supply Hub of the Empire</p>
     </header>
-
     <div class="container">
         <div>
             <h2>Weapon Systems</h2>
             <div id="catalog">
-                <div class="card">
-                    <h3>Gen-5 Stealth Fighter</h3>
-                    <div class="price">$140 Million</div>
-                    <input type="number" id="qty-g5" value="1" min="1">
-                    <button onclick="addToCart('Gen-5 Stealth Fighter', 140000000, 'qty-g5')">Add to Order</button>
-                </div>
-                <div class="card">
-                    <h3>Supercarrier</h3>
-                    <div class="price">$12 Billion</div>
-                    <input type="number" id="qty-sc" value="1" min="1">
-                    <button onclick="addToCart('Supercarrier', 12000000000, 'qty-sc')">Add to Order</button>
-                </div>
-                <div class="card">
-                    <h3>Nuclear Attack Sub</h3>
-                    <div class="price">$2.2 Billion</div>
-                    <input type="number" id="qty-sub" value="1" min="1">
-                    <button onclick="addToCart('Nuclear Attack Sub', 2200000000, 'qty-sub')">Add to Order</button>
-                </div>
+                <div class="card"><h3>Gen-4.5 Multi-Role Jet</h3><div class="price">$80 Million</div><input type="number" id="qty-jet" value="1"><button onclick="addToCart('Gen-4.5 Jet', 80000000, 'qty-jet')">Add</button></div>
+                <div class="card"><h3>Gen-5 Stealth Fighter</h3><div class="price">$140 Million</div><input type="number" id="qty-g5" value="1"><button onclick="addToCart('Gen-5 Fighter', 140000000, 'qty-g5')">Add</button></div>
+                <div class="card"><h3>Gen-6 Hyper-Jet</h3><div class="price">$250 Million</div><input type="number" id="qty-g6" value="1"><button onclick="addToCart('Gen-6 Hyper-Jet', 250000000, 'qty-g6')">Add</button></div>
+                <div class="card"><h3>Supercarrier</h3><div class="price">$12 Billion</div><input type="number" id="qty-sc" value="1"><button onclick="addToCart('Supercarrier', 12000000000, 'qty-sc')">Add</button></div>
+                <div class="card"><h3>Nuclear Attack Sub</h3><div class="price">$2.2 Billion</div><input type="number" id="qty-sub" value="1"><button onclick="addToCart('Nuclear Attack Sub', 2200000000, 'qty-sub')">Add</button></div>
             </div>
         </div>
-
         <div class="order-panel">
             <h3>Place Purchase Request</h3>
-            <label>Country Name</label>
-            <input type="text" id="country-name" placeholder="e.g., France">
-            <label>Alliance Status</label>
-            <select id="alliance">
-                <option>Neutral</option>
-                <option>UN Member</option>
-                <option>Empire Ally</option>
-            </select>
-            <div id="cart-list" class="cart-list">No items added.</div>
+            <input type="text" id="country-name" placeholder="Country Name">
+            <select id="alliance"><option>Neutral</option><option>UN Member</option><option>Empire Ally</option></select>
+            <div id="cart-list">No items added.</div>
             <div id="total-display">Total: $0</div>
             <button class="submit-btn" onclick="submitOrder()">Transmit Order to Romania</button>
         </div>
     </div>
-
     <script>
         let cart = [];
-        let grandTotal = 0;
-
-        function formatCost(amount) {
-            if (amount >= 1000000000) return (amount / 1000000000) + ' Billion';
-            if (amount >= 1000000) return (amount / 1000000) + ' Million';
-            return amount;
-        }
-
-        function addToCart(name, price, inputId) {
-            const qty = parseInt(document.getElementById(inputId).value);
-            cart.push({ name, price, qty });
+        function addToCart(name, price, id) {
+            cart.push({ name, price, qty: document.getElementById(id).value });
             updateUI();
         }
-
         function updateUI() {
-            const list = document.getElementById('cart-list');
-            list.innerHTML = cart.map(i => `<div>${i.name} (x${i.qty})</div>`).join('');
-            grandTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            document.getElementById('total-display').innerText = 'Total: $' + formatCost(grandTotal);
+            document.getElementById('cart-list').innerHTML = cart.map(i => `<div>${i.name} (x${i.qty})</div>`).join('');
+            let total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+            document.getElementById('total-display').innerText = 'Total: $' + total.toLocaleString();
         }
-
         async function submitOrder() {
-            const buyer = document.getElementById('country-name').value;
-            if (!buyer || cart.length === 0) { alert('Fill in details and add items!'); return; }
-
-            const data = {
-                'Country': buyer,
-                'Alliance': document.getElementById('alliance').value,
-                'Items': cart.map(i => i.name).join(', '),
-                'Total': '$' + formatCost(grandTotal)
-            };
-
-            // CONNECTS TO YOUR GOOGLE SHEET
-            await fetch('PASTE_YOUR_SHEETDB_API_URL_HERE', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ data: data })
-            });
-
-            alert('Transmission Complete! Order sent to Empire Ledger.');
-            cart = [];
-            updateUI();
+            const data = { 'Country': document.getElementById('country-name').value, 'Alliance': document.getElementById('alliance').value, 'Items': cart.map(i => i.name).join(', '), 'Total': document.getElementById('total-display').innerText };
+            // REPLACE THIS LINK WITH YOUR SHEETDB URL
+            await fetch('PASTE_YOUR_SHEETDB_API_URL_HERE', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ data: data }) });
+            alert('Transmission Complete!');
+            cart = []; updateUI();
         }
     </script>
 </body>
